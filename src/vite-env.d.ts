@@ -13,16 +13,19 @@ declare module "styled-components" {
       background: string;
       shadow: string;
       color: string;
+      hover: string;
     };
     resultKey: {
       background: string;
       shadow: string;
       color: string;
+      hover: string;
     };
     resetKey: {
       background: string;
       shadow: string;
       color: string;
+      hover: string;
     };
     toggle: string;
     color: string;

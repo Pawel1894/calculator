@@ -19,6 +19,10 @@ const Wrapper = styled.div`
   display: grid;
   place-content: center;
   min-height: 100vh;
+
+  & > * + * {
+    margin-top: 1rem;
+  }
 `;
 
 function App() {

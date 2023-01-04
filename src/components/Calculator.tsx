@@ -1,7 +1,14 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
+import styled from "styled-components";
+import Keyboard from "./Keyboard";
+import Output from "./Output";
 
-interface Props {}
-
-export default function Calculator({}: Props): ReactElement {
-  return <div></div>;
+export default function Calculator(): ReactElement {
+  const [result, setResult] = useState<number>(0);
+  return (
+    <>
+      <Output result={result} />
+      <Keyboard setResult={setResult} />
+    </>
+  );
 }

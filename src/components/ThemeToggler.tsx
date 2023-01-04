@@ -21,7 +21,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: flex-end;
   column-gap: 0.75rem;
-  cursor: pointer;
 `;
 
 const Label = styled.span`
@@ -49,6 +48,7 @@ const Toggler = styled.div<TToggler>`
   height: 23px;
   display: block;
   padding: 0.25rem;
+  cursor: pointer;
 
   span {
     display: block;
@@ -82,13 +82,13 @@ export default function ThemeToggler(): ReactElement {
   }
 
   return (
-    <Wrapper onClick={changeTheme}>
+    <Wrapper>
       <Label>theme</Label>
       <TogglerWrapper>
         <ThemeNumber>1</ThemeNumber>
         <ThemeNumber>2</ThemeNumber>
         <ThemeNumber>3</ThemeNumber>
-        <Toggler name={value?.name}>
+        <Toggler onClick={changeTheme} name={value?.name}>
           <span></span>
         </Toggler>
       </TogglerWrapper>
