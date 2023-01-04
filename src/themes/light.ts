@@ -1,4 +1,7 @@
-const lightTheme = {
+import { DefaultTheme } from "styled-components";
+
+const lightTheme: DefaultTheme = {
+  name: "lightTheme",
   backgrounds: {
     main: "hsl(0, 0%, 90%)",
     toggle: "hsl(0, 5%, 81%)",
@@ -19,6 +22,7 @@ const lightTheme = {
     shadow: "hsl(35, 11%, 61%)",
     color: "hsl(0, 0%, 100%)",
   },
+  toggle: "hsl(25, 98%, 40%)",
   color: "hsl(60, 10%, 19%)",
 };
 

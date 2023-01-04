@@ -1,4 +1,7 @@
-const highContrastTheme = {
+import { DefaultTheme } from "styled-components";
+
+const highContrastTheme: DefaultTheme = {
+  name: "contrastTheme",
   backgrounds: {
     main: "hsl(268, 75%, 9%)",
     toggle: "hsl(268, 71%, 12%)",
@@ -19,6 +22,7 @@ const highContrastTheme = {
     shadow: "hsl(290, 70%, 36%)",
     color: "hsl(0, 0%, 100%)",
   },
+  toggle: "hsl(176, 100%, 44%)",
   color: "hsl(52, 100%, 62%)",
 };
 

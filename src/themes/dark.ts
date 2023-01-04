@@ -1,4 +1,7 @@
-const darkTheme = {
+import { DefaultTheme } from "styled-components";
+
+const darkTheme: DefaultTheme = {
+  name: "darkTheme",
   backgrounds: {
     main: "hsl(222, 26%, 31%)",
     toggle: "hsl(223, 31%, 20%)",
@@ -19,6 +22,7 @@ const darkTheme = {
     shadow: "hsl(28, 16%, 65%)",
     color: "hsl(0, 0%, 100%)",
   },
+  toggle: "hsl(6, 63%, 50%)",
   color: "hsl(0, 0%, 100%)",
 };
 

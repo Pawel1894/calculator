@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { DefaultTheme, ThemeProvider } from "styled-components";
 import Calculator from "./components/Calculator";
 import Header from "./components/Header";
 import darkTheme from "./themes/dark";
 import { createGlobalStyle } from "styled-components";
 import { ThemeContext } from "./context/ThemeContext";
+import lightTheme from "./themes/light";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,10 +22,20 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme, setTheme] = useState<DefaultTheme>(() => {
+    const theme = localStorage.getItem("theme");
+    if (theme != null) return JSON.parse(theme) as DefaultTheme;
+
+    return darkTheme;
+  });
 
   return (
-    <ThemeContext.Provider value={setTheme}>
+    <ThemeContext.Provider
+      value={{
+        setTheme: setTheme,
+        value: theme,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <Wrapper>
           <Header />
