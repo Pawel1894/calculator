@@ -77,7 +77,7 @@ export default function Keyboard({ setResult, result, setLastAction, lastAction 
 
     if (key === ".") {
       if (handleDotKey()) setOutput(newKey);
-    } else {
+    } else if (!(result.length === 1 && result[0] === "0")) {
       if (key === "x") newKey = "*";
 
       setOutput(newKey);
