@@ -2,6 +2,10 @@ import React, { ReactElement } from "react";
 import styled from "styled-components";
 import { Button } from "./styles/ButtonStyle";
 
+interface Props {
+  equalHandler: () => void;
+}
+
 const StyledButton = styled(Button)`
   background-color: ${(props) => props.theme.resultKey.background};
   color: ${(props) => props.theme.resultKey.color};
@@ -13,6 +17,6 @@ const StyledButton = styled(Button)`
     background-color: ${(props) => props.theme.resultKey.hover};
   }
 `;
-export default function ResultButton(): ReactElement {
-  return <StyledButton>=</StyledButton>;
+export default function ResultButton({ equalHandler }: Props): ReactElement {
+  return <StyledButton onClick={equalHandler}>=</StyledButton>;
 }

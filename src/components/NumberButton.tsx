@@ -1,9 +1,11 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
+import { TNumberValues } from "../types";
 import { Button } from "./styles/ButtonStyle";
 
 interface Props {
   value: string;
+  setOutput: (value: TNumberValues) => void;
 }
 
 const StyledButton = styled(Button)`
@@ -16,6 +18,10 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export default function NumberButton({ value }: Props): ReactElement {
-  return <StyledButton>{value}</StyledButton>;
+export default function NumberButton({ value, setOutput }: Props): ReactElement {
+  function updateValue() {
+    setOutput(Number(value));
+  }
+
+  return <StyledButton onClick={updateValue}>{value}</StyledButton>;
 }

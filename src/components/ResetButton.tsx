@@ -4,9 +4,14 @@ import { Button } from "./styles/ButtonStyle";
 
 interface Props {
   value: "del" | "reset";
+  clearOutput: (value: "del" | "reset") => void;
 }
 
-const StyledButton = styled(Button)<Props>`
+type StyleProps = {
+  value: "del" | "reset";
+};
+
+const StyledButton = styled(Button)<StyleProps>`
   background-color: ${(props) => props.theme.resetKey.background};
   color: ${(props) => props.theme.resetKey.color};
   box-shadow: 0px 3px 0px 0px ${(props) => props.theme.resetKey.shadow};
@@ -17,6 +22,14 @@ const StyledButton = styled(Button)<Props>`
   }
 `;
 
-export default function ResetButton({ value }: Props): ReactElement {
-  return <StyledButton value={value}>{value}</StyledButton>;
+export default function ResetButton({ value, clearOutput }: Props): ReactElement {
+  function onClickHandler() {
+    clearOutput(value);
+  }
+
+  return (
+    <StyledButton onClick={onClickHandler} value={value}>
+      {value}
+    </StyledButton>
+  );
 }

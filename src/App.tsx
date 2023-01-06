@@ -23,6 +23,10 @@ const Wrapper = styled.div`
   & > * + * {
     margin-top: 1rem;
   }
+
+  & > div {
+    max-width: 28rem;
+  }
 `;
 
 function App() {
