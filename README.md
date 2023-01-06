@@ -1,6 +1,6 @@
 # [Frontend Mentor - Calculator app challenge](https://three-theme-calculator.netlify.app/)
 
-This is simple calculator app, but with 3 different themes. I tried to mimic windows 10 calculator behavior. Calculator is designed by [Fronted Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29).
+This is simple calculator app, but with 3 different themes. Calculator is designed by [Fronted Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29).
 
 ## Table of contents
 
