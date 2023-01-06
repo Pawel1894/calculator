@@ -7,7 +7,7 @@ import ResetButton from "./ResetButton";
 import ResultButton from "./ResultButton";
 
 type Props = {
-  setResult: React.Dispatch<React.SetStateAction<string | null>>;
+  setResult: React.Dispatch<React.SetStateAction<string>>;
   setLastAction: React.Dispatch<React.SetStateAction<TAction | null>>;
   result: string | null;
   lastAction: TAction | null;
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 export default function Keyboard({ setResult, result, setLastAction, lastAction }: Props): ReactElement {
   function setOutput(value: TNumberValues | TAction) {
     setResult((prev: string | null) => {
-      if (!prev) return String(value);
+      if (!prev || (prev === "0" && value !== ".")) return String(value);
 
       return prev + String(value);
     });
@@ -35,15 +35,17 @@ export default function Keyboard({ setResult, result, setLastAction, lastAction 
   function removeLastChar() {
     if (result)
       setResult((prevState) => {
-        if (prevState) return String(prevState).slice(0, -1);
+        const newVal = String(prevState).slice(0, -1);
+        if (newVal) return newVal;
 
-        return null;
+        return "0";
       });
   }
 
   function clearOutput(value: TReset) {
-    if (value === "del") removeLastChar();
-    else if (value === "reset") resetStates();
+    if (value === "del") {
+      removeLastChar();
+    } else if (value === "reset") resetStates();
   }
 
   function handleDotKey() {
@@ -57,7 +59,7 @@ export default function Keyboard({ setResult, result, setLastAction, lastAction 
 
   function calculateResult() {
     if (result) return String(eval(result));
-    else return null;
+    else return "0";
   }
 
   function checkIfLastIsSpecialChar() {
@@ -90,7 +92,7 @@ export default function Keyboard({ setResult, result, setLastAction, lastAction 
   }
 
   function resetStates() {
-    setResult(null);
+    setResult("0");
     setLastAction(null);
   }
 
