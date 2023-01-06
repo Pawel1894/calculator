@@ -16,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
+  @media (max-width: 32rem) {
+    min-height: unset;
+    padding: 2rem 1rem;
+  }
+
   display: grid;
   place-content: center;
   min-height: 100vh;

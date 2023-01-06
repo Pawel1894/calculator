@@ -7,6 +7,9 @@ interface Props {
 }
 
 const StyledButton = styled(Button)`
+  @media (max-width: 32rem) {
+    font-size: 1.5rem;
+  }
   background-color: ${(props) => props.theme.resultKey.background};
   color: ${(props) => props.theme.resultKey.color};
   cursor: pointer;

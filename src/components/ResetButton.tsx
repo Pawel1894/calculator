@@ -12,6 +12,9 @@ type StyleProps = {
 };
 
 const StyledButton = styled(Button)<StyleProps>`
+  @media (max-width: 32rem) {
+    font-size: 1.1rem;
+  }
   background-color: ${(props) => props.theme.resetKey.background};
   color: ${(props) => props.theme.resetKey.color};
   box-shadow: 0px 3px 0px 0px ${(props) => props.theme.resetKey.shadow};

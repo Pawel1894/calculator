@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
+  @media (max-width: 32rem) {
+    padding: 0.75rem 1rem;
+  }
   padding: 0.75rem 1.25rem;
   font-size: 2rem;
   border-radius: 0.5rem;
