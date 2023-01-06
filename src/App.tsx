@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
 const Wrapper = styled.div`
   @media (max-width: 32rem) {
     min-height: unset;
+    place-content: unset;
     padding: 2rem 1rem;
   }
 
