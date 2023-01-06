@@ -7,6 +7,7 @@ type Props = {
 
 const Wrapper = styled.div`
   padding-block: 1rem;
+  padding-top: 1.5rem;
   text-align: right;
   background-color: ${(props) => props.theme.backgrounds.screen};
   border-radius: 0.5rem;

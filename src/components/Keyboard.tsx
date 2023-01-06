@@ -8,13 +8,9 @@ import ResultButton from "./ResultButton";
 
 type Props = {
   setResult: React.Dispatch<React.SetStateAction<string | null>>;
-  setTmpResult: React.Dispatch<React.SetStateAction<string | null>>;
   setLastAction: React.Dispatch<React.SetStateAction<TAction | null>>;
-  setIsFinalResult: React.Dispatch<React.SetStateAction<boolean>>;
-  tmpResult: string | null;
   result: string | null;
   lastAction: TAction | null;
-  isFinalResult: boolean;
 };
 
 const Wrapper = styled.div`
@@ -27,93 +23,75 @@ const Wrapper = styled.div`
   gap: 1rem;
 `;
 
-export default function Keyboard({
-  setResult,
-  tmpResult,
-  setTmpResult,
-  result,
-  setLastAction,
-  lastAction,
-  setIsFinalResult,
-  isFinalResult,
-}: Props): ReactElement {
-  function setOutput(value: TNumberValues) {
-    if (isFinalResult) resetStates();
-
+export default function Keyboard({ setResult, result, setLastAction, lastAction }: Props): ReactElement {
+  function setOutput(value: TNumberValues | TAction) {
     setResult((prev: string | null) => {
       if (!prev) return String(value);
-
-      if (prev && prev.length === 19) return prev;
 
       return prev + String(value);
     });
   }
 
-  function clearOutput(value: TReset) {
-    if (value === "del") resetStates();
-    else if (value === "reset") setResult(null);
+  function removeLastChar() {
+    if (result)
+      setResult((prevState) => {
+        if (prevState) return String(prevState).slice(0, -1);
+
+        return null;
+      });
   }
 
-  function handleDotKey(key: TAction) {
-    if (!result?.includes(".")) {
-      setTmpResult(result);
-      setResult((prev: string | null) => {
-        if (!prev) return "0" + key;
+  function clearOutput(value: TReset) {
+    if (value === "del") removeLastChar();
+    else if (value === "reset") resetStates();
+  }
 
-        return prev + key;
-      });
+  function handleDotKey() {
+    const newResult = result?.split(/[+\-*\/]/);
+
+    if (newResult && newResult[newResult.length - 1].includes(".")) {
+      return false;
     }
+    return true;
   }
 
   function calculateResult() {
-    if (tmpResult && lastAction) {
-      const action = tmpResult + lastAction + result;
-      return eval(action);
-    }
+    if (result) return String(eval(result));
+    else return null;
+  }
 
-    return null;
+  function checkIfLastIsSpecialChar() {
+    const char = result?.charAt(result.length - 1);
+
+    if (Number(char) === Number(char)) return true;
+
+    return false;
   }
 
   function actionHandler(key: TAction) {
-    let newResult = result;
+    let newKey = key;
+
+    if (!result || !checkIfLastIsSpecialChar()) return;
 
     if (key === ".") {
-      handleDotKey(key);
-      return;
-    }
-
-    if (lastAction && lastAction !== ".") {
-      newResult = calculateResult();
-    }
-
-    if (key === "x") {
-      setLastAction("*");
+      if (handleDotKey()) setOutput(newKey);
     } else {
-      setLastAction(key);
-    }
+      if (key === "x") newKey = "*";
 
-    setTmpResult(newResult ?? "0");
-    setResult(null);
+      setOutput(newKey);
+    }
   }
 
   function equalHandler() {
-    setIsFinalResult(true);
+    if (lastAction) return;
 
-    if (!lastAction) return;
-
-    if (lastAction) {
-      let newResult = calculateResult();
-      setResult(newResult);
-      setTmpResult(null);
-      setLastAction(null);
-    }
+    const newResult = calculateResult();
+    setResult(newResult);
   }
 
   function resetStates() {
     setResult(null);
-    setTmpResult(null);
     setLastAction(null);
-    setIsFinalResult(false);
   }
 
   return (
